@@ -313,126 +313,201 @@
       .stats{grid-template-columns:1fr}
       .title{font-size:1.6rem}
     }
+
     .screen {
-  display: none;
-  min-height: 100vh;
-  background: #000;
-  color: #fff;
-  padding: 32px 24px;
-}
+      display: none;
+      min-height: 100vh;
+      background: #000;
+      color: #fff;
+      padding: 32px 24px;
+    }
 
-.screen.active {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
+    .screen.active {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
 
-.screen h1 {
-  font-size: 2rem;
-  font-weight: 800;
-  text-align: center;
-  margin-bottom: 16px;
-}
+    .screen h1 {
+      font-size: 2rem;
+      font-weight: 800;
+      text-align: center;
+      margin-bottom: 16px;
+    }
 
-.screen button {
-  width: 100%;
-  padding: 16px;
-  border: none;
-  border-radius: 16px;
-  background: #fff;
-  color: #000;
-  font-size: 1.1rem;
-  font-weight: 800;
-  margin-top: 20px;
-}
+    .screen button {
+      width: 100%;
+      padding: 16px;
+      border: none;
+      border-radius: 16px;
+      background: #fff;
+      color: #000;
+      font-size: 1.1rem;
+      font-weight: 800;
+      margin-top: 20px;
+    }
   </style>
 </head>
 <body>
- <div id="onboarding">
-  <div class="screen active" id="screen1">
-    <h1>Welcome to Trade Journal Pro</h1>
-    <button onclick="nextScreen()">Continue</button>
-  </div>
-
-  <div class="screen" id="screen2">
-    <h1>What broker do you use?</h1>
-
-<button onclick="setBroker('Robinhood')">Robinhood</button>
-<button onclick="setBroker('Webull')">Webull</button>
-<button onclick="setBroker('TD Ameritrade')">TD Ameritrade</button>
-<button onclick="setBroker('E*TRADE')">E*TRADE</button>
-<button onclick="setBroker('Other')">Other</button>
-  </div>
-</div> 
-  <div id="app" style="display:none;">
-    <div class="header">
-      <div class="header-top">
-        <div>
-          <div class="title">Trade Journal Pro</div>
-          <div class="subtitle">Track every trade. Find your edge. Cut your mistakes.</div>
-        </div>
-        <div class="badge" id="todayBadge">Loading...</div>
-      </div>
+  <div id="onboarding">
+    <div class="screen active" id="screen1">
+      <h1>Welcome to Trade Journal Pro</h1>
+      <button onclick="nextScreen()">Continue</button>
     </div>
 
-    <div class="grid">
-      <div class="card col-12">
-        <div class="card-title">Performance Dashboard</div>
-        <div class="stats">
-          <div class="stat">
-            <div class="stat-label">Total P&amp;L</div>
-            <div class="stat-value" id="statPnL">$0.00</div>
+    <div class="screen" id="screen2">
+      <h1>What broker do you use?</h1>
+
+      <button onclick="setBroker('Robinhood')">Robinhood</button>
+      <button onclick="setBroker('Webull')">Webull</button>
+      <button onclick="setBroker('TD Ameritrade')">TD Ameritrade</button>
+      <button onclick="setBroker('E*TRADE')">E*TRADE</button>
+      <button onclick="setBroker('Other')">Other</button>
+    </div>
+  </div>
+
+  <div id="app" style="display:none;">
+    <div class="app">
+      <div class="header">
+        <div class="header-top">
+          <div>
+            <div class="title">Trade Journal Pro</div>
+            <div class="subtitle">Track every trade. Find your edge. Cut your mistakes.</div>
           </div>
-          <div class="stat">
-            <div class="stat-label">Win Rate</div>
-            <div class="stat-value blue" id="statWinRate">0%</div>
-          </div>
-          <div class="stat">
-            <div class="stat-label">Average Winner</div>
-            <div class="stat-value green" id="statAvgWin">$0.00</div>
-          </div>
-          <div class="stat">
-            <div class="stat-label">Average Loser</div>
-            <div class="stat-value red" id="statAvgLoss">$0.00</div>
-          </div>
+          <div class="badge" id="todayBadge">Loading...</div>
         </div>
       </div>
 
-      <div class="card col-8">
-        <div class="card-title">Add Trade</div>
-        <div class="form-grid">
-          <div class="field">
-            <label for="ticker">Ticker</label>
-            <input id="ticker" placeholder="SPY" />
+      <div class="grid">
+        <div class="card col-12">
+          <div class="card-title">Performance Dashboard</div>
+          <div class="stats">
+            <div class="stat">
+              <div class="stat-label">Total P&amp;L</div>
+              <div class="stat-value" id="statPnL">$0.00</div>
+            </div>
+            <div class="stat">
+              <div class="stat-label">Win Rate</div>
+              <div class="stat-value blue" id="statWinRate">0%</div>
+            </div>
+            <div class="stat">
+              <div class="stat-label">Average Winner</div>
+              <div class="stat-value green" id="statAvgWin">$0.00</div>
+            </div>
+            <div class="stat">
+              <div class="stat-label">Average Loser</div>
+              <div class="stat-value red" id="statAvgLoss">$0.00</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card col-8">
+          <div class="card-title">Add Trade</div>
+          <div class="form-grid">
+            <div class="field">
+              <label for="ticker">Ticker</label>
+              <input id="ticker" placeholder="SPY" />
+            </div>
+
+            <div class="field">
+              <label for="side">Side</label>
+              <select id="side">
+                <option value="Call">Call</option>
+                <option value="Put">Put</option>
+                <option value="Shares">Shares</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="entry">Entry Price</label>
+              <input id="entry" type="number" step="0.01" placeholder="1.25" />
+            </div>
+
+            <div class="field">
+              <label for="exit">Exit Price</label>
+              <input id="exit" type="number" step="0.01" placeholder="1.80" />
+            </div>
+
+            <div class="field">
+              <label for="contracts">Contracts / Shares</label>
+              <input id="contracts" type="number" step="1" placeholder="2" />
+            </div>
+
+            <div class="field">
+              <label for="strategy">Strategy</label>
+              <select id="strategy">
+                <option value="Breakout">Breakout</option>
+                <option value="Pullback">Pullback</option>
+                <option value="Reversal">Reversal</option>
+                <option value="Trend Follow">Trend Follow</option>
+                <option value="Scalp">Scalp</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="tradeDate">Date</label>
+              <input id="tradeDate" type="date" />
+            </div>
+
+            <div class="field">
+              <label for="tradeTime">Time</label>
+              <input id="tradeTime" type="time" />
+            </div>
+
+            <div class="field">
+              <label for="mistake">Main Mistake</label>
+              <select id="mistake">
+                <option value="">None</option>
+                <option value="Late Entry">Late Entry</option>
+                <option value="No Stop Loss">No Stop Loss</option>
+                <option value="Revenge Trade">Revenge Trade</option>
+                <option value="Overtrading">Overtrading</option>
+                <option value="Early Exit">Early Exit</option>
+                <option value="Oversized">Oversized</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="setupGrade">Setup Grade</label>
+              <select id="setupGrade">
+                <option value="A">A</option>
+                <option value="B">B</option>
+                <option value="C">C</option>
+              </select>
+            </div>
+
+            <div class="field full">
+              <label for="notes">Notes</label>
+              <textarea id="notes" placeholder="Why did you take this trade? What did you do right or wrong?"></textarea>
+            </div>
           </div>
 
-          <div class="field">
-            <label for="side">Side</label>
-            <select id="side">
-              <option value="Call">Call</option>
-              <option value="Put">Put</option>
-              <option value="Shares">Shares</option>
+          <div class="btn-row">
+            <button class="btn-primary" onclick="addTrade()">Save Trade</button>
+            <button class="btn-secondary" onclick="clearForm()">Clear Form</button>
+            <button class="btn-danger" onclick="clearAllTrades()">Delete All</button>
+          </div>
+
+          <div class="footer-note">Options P&amp;L is calculated as (exit - entry) × contracts × 100.</div>
+        </div>
+
+        <div class="card col-4">
+          <div class="card-title">AI-Style Insights</div>
+          <div class="list" id="insightList"></div>
+        </div>
+
+        <div class="card col-12">
+          <div class="card-title">Trade History</div>
+
+          <div class="filters">
+            <input id="filterTicker" placeholder="Filter by ticker" oninput="renderTrades()" style="max-width:220px;" />
+            <select id="filterResult" onchange="renderTrades()" style="max-width:180px;">
+              <option value="all">All Results</option>
+              <option value="win">Wins Only</option>
+              <option value="loss">Losses Only</option>
             </select>
-          </div>
-
-          <div class="field">
-            <label for="entry">Entry Price</label>
-            <input id="entry" type="number" step="0.01" placeholder="1.25" />
-          </div>
-
-          <div class="field">
-            <label for="exit">Exit Price</label>
-            <input id="exit" type="number" step="0.01" placeholder="1.80" />
-          </div>
-
-          <div class="field">
-            <label for="contracts">Contracts / Shares</label>
-            <input id="contracts" type="number" step="1" placeholder="2" />
-          </div>
-
-          <div class="field">
-            <label for="strategy">Strategy</label>
-            <select id="strategy">
+            <select id="filterStrategy" onchange="renderTrades()" style="max-width:180px;">
+              <option value="all">All Strategies</option>
               <option value="Breakout">Breakout</option>
               <option value="Pullback">Pullback</option>
               <option value="Reversal">Reversal</option>
@@ -441,116 +516,65 @@
             </select>
           </div>
 
-          <div class="field">
-            <label for="tradeDate">Date</label>
-            <input id="tradeDate" type="date" />
-          </div>
-
-          <div class="field">
-            <label for="tradeTime">Time</label>
-            <input id="tradeTime" type="time" />
-          </div>
-
-          <div class="field">
-            <label for="mistake">Main Mistake</label>
-            <select id="mistake">
-              <option value="">None</option>
-              <option value="Late Entry">Late Entry</option>
-              <option value="No Stop Loss">No Stop Loss</option>
-              <option value="Revenge Trade">Revenge Trade</option>
-              <option value="Overtrading">Overtrading</option>
-              <option value="Early Exit">Early Exit</option>
-              <option value="Oversized">Oversized</option>
-            </select>
-          </div>
-
-          <div class="field">
-            <label for="setupGrade">Setup Grade</label>
-            <select id="setupGrade">
-              <option value="A">A</option>
-              <option value="B">B</option>
-              <option value="C">C</option>
-            </select>
-          </div>
-
-          <div class="field full">
-            <label for="notes">Notes</label>
-            <textarea id="notes" placeholder="Why did you take this trade? What did you do right or wrong?"></textarea>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Ticker</th>
+                  <th>Side</th>
+                  <th>Strategy</th>
+                  <th>Entry</th>
+                  <th>Exit</th>
+                  <th>Size</th>
+                  <th>P&amp;L</th>
+                  <th>Result</th>
+                  <th>Mistake</th>
+                  <th>Notes</th>
+                  <th>Delete</th>
+                </tr>
+              </thead>
+              <tbody id="tradeTable"></tbody>
+            </table>
           </div>
         </div>
 
-        <div class="btn-row">
-          <button class="btn-primary" onclick="addTrade()">Save Trade</button>
-          <button class="btn-secondary" onclick="clearForm()">Clear Form</button>
-          <button class="btn-danger" onclick="clearAllTrades()">Delete All</button>
+        <div class="card col-12">
+          <div class="card-title">User Reviews</div>
+
+          <div class="list">
+            <div class="list-item">
+              <strong>⭐⭐⭐⭐⭐ Mike R.</strong>
+              <p style="margin-top:8px;">“This app helped me track my trades way better. My profits improved fast.”</p>
+            </div>
+
+            <div class="list-item">
+              <strong>⭐⭐⭐⭐⭐ Jason K.</strong>
+              <p style="margin-top:8px;">“Clean, simple, and actually useful. Way better than spreadsheets.”</p>
+            </div>
+
+            <div class="list-item">
+              <strong>⭐⭐⭐⭐☆ Alex T.</strong>
+              <p style="margin-top:8px;">“Love it. Just wish it had even more advanced stats and charts.”</p>
+            </div>
+          </div>
         </div>
 
-        <div class="footer-note">Options P&amp;L is calculated as (exit - entry) × contracts × 100.</div>
-      </div>
-
-      <div class="card col-4">
-        <div class="card-title">AI-Style Insights</div>
-        <div class="list" id="insightList"></div>
-      </div>
-
-      <div class="card col-12">
-        <div class="card-title">Trade History</div>
-
-        <div class="filters">
-          <input id="filterTicker" placeholder="Filter by ticker" oninput="renderTrades()" style="max-width:220px;" />
-          <select id="filterResult" onchange="renderTrades()" style="max-width:180px;">
-            <option value="all">All Results</option>
-            <option value="win">Wins Only</option>
-            <option value="loss">Losses Only</option>
-          </select>
-          <select id="filterStrategy" onchange="renderTrades()" style="max-width:180px;">
-            <option value="all">All Strategies</option>
-            <option value="Breakout">Breakout</option>
-            <option value="Pullback">Pullback</option>
-            <option value="Reversal">Reversal</option>
-            <option value="Trend Follow">Trend Follow</option>
-            <option value="Scalp">Scalp</option>
-          </select>
+        <div class="card col-6">
+          <div class="card-title">Best Setup</div>
+          <div class="insight" id="bestSetupBox">Add trades to see your strongest setup.</div>
         </div>
 
-        <div class="table-wrap">
-          <table>
-            <thead>
-              <tr>
-                <th>Date</th>
-                <th>Ticker</th>
-                <th>Side</th>
-                <th>Strategy</th>
-                <th>Entry</th>
-                <th>Exit</th>
-                <th>Size</th>
-                <th>P&amp;L</th>
-                <th>Result</th>
-                <th>Mistake</th>
-                <th>Notes</th>
-                <th>Delete</th>
-              </tr>
-            </thead>
-            <tbody id="tradeTable"></tbody>
-          </table>
+        <div class="card col-6">
+          <div class="card-title">Mistake Analysis</div>
+          <div class="insight" id="mistakeBox">Add trades to see which mistake costs you the most.</div>
         </div>
-      </div>
-
-      <div class="card col-6">
-        <div class="card-title">Best Setup</div>
-        <div class="insight" id="bestSetupBox">Add trades to see your strongest setup.</div>
-      </div>
-
-      <div class="card col-6">
-        <div class="card-title">Mistake Analysis</div>
-        <div class="insight" id="mistakeBox">Add trades to see which mistake costs you the most.</div>
       </div>
     </div>
   </div>
 
   <script>
     const STORAGE_KEY = "tradeJournalProTrades";
-
     let trades = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
 
     const $ = (id) => document.getElementById(id);
@@ -616,6 +640,7 @@
         alert("Enter a ticker.");
         return;
       }
+
       if(!trade.entry || !trade.exit || !trade.contracts){
         alert("Fill in entry, exit, and contracts/shares.");
         return;
@@ -815,36 +840,35 @@
     setToday();
     renderAll();
   </script>
+
   <script>
     let currentScreen = 1;
 
-function nextScreen() {
-  const current = document.getElementById('screen' + currentScreen);
-  if (current) current.classList.remove('active');
+    function nextScreen() {
+      const current = document.getElementById('screen' + currentScreen);
+      if (current) current.classList.remove('active');
 
-  currentScreen++;
+      currentScreen++;
 
-  const next = document.getElementById('screen' + currentScreen);
-  if (next) {
-    next.classList.add('active');
-  }
-}
+      const next = document.getElementById('screen' + currentScreen);
+      if (next) {
+        next.classList.add('active');
+      }
+    }
 
-function setBroker(broker) {
-  localStorage.setItem('broker', broker);
-  document.getElementById('onboarding').style.display = 'none';
-  document.getElementById('app').style.display = 'block';
-}
+    function setBroker(broker) {
+      localStorage.setItem('broker', broker);
+      document.getElementById('onboarding').style.display = 'none';
+      document.getElementById('app').style.display = 'block';
+    }
 
-window.addEventListener('load', function () {
-  const savedBroker = localStorage.getItem('broker');
-  if (savedBroker) {
-    document.getElementById('onboarding').style.display = 'none';
-    document.getElementById('app').style.display = 'block';
-  }
-});
-
-
-</script>
+    window.addEventListener('load', function () {
+      const savedBroker = localStorage.getItem('broker');
+      if (savedBroker) {
+        document.getElementById('onboarding').style.display = 'none';
+        document.getElementById('app').style.display = 'block';
+      }
+    });
+  </script>
 </body>
 </html>

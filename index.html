@@ -316,7 +316,18 @@
   </style>
 </head>
 <body>
-  <div class="app">
+ <div id="onboarding">
+  <div class="screen active" id="screen1">
+    <h1>Welcome to Trade Journal Pro</h1>
+    <button onclick="nextScreen()">Continue</button>
+  </div>
+
+  <div class="screen" id="screen2">
+    <h1>What broker do you use?</h1>
+    <button onclick="setBroker('Robinhood')">Robinhood</button>
+  </div>
+</div> 
+  <div id="app" style="display:none;">
     <div class="header">
       <div class="header-top">
         <div>

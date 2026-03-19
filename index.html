@@ -810,5 +810,36 @@
     setToday();
     renderAll();
   </script>
+  <script>
+    let currentScreen = 1;
+
+function nextScreen() {
+  const current = document.getElementById('screen' + currentScreen);
+  if (current) current.classList.remove('active');
+
+  currentScreen++;
+
+  const next = document.getElementById('screen' + currentScreen);
+  if (next) {
+    next.classList.add('active');
+  }
+}
+
+function setBroker(broker) {
+  localStorage.setItem('broker', broker);
+  document.getElementById('onboarding').style.display = 'none';
+  document.getElementById('app').style.display = 'block';
+}
+
+window.addEventListener('load', function () {
+  const savedBroker = localStorage.getItem('broker');
+  if (savedBroker) {
+    document.getElementById('onboarding').style.display = 'none';
+    document.getElementById('app').style.display = 'block';
+  }
+});
+
+
+</script>
 </body>
 </html>

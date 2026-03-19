@@ -6,19 +6,19 @@
   <title>Trade Journal Pro</title>
   <style>
     :root{
-      --bg:#f4f7fb;
-      --card:#ffffff;
-      --card2:#eef2f7;
-      --text:#172033;
-      --muted:#6b7280;
-      --line:#d8e0ea;
-      --green:#16a34a;
+      --bg:#0b0b0f;
+      --card:#15161c;
+      --card2:#1c1d24;
+      --text:#ffffff;
+      --muted:#9ca3af;
+      --line:#2a2d36;
+      --green:#22c55e;
       --red:#ef4444;
-      --blue:#2563eb;
-      --yellow:#eab308;
-      --purple:#7c3aed;
-      --shadow:0 10px 30px rgba(15,23,42,.08);
-      --radius:18px;
+      --blue:#3b82f6;
+      --yellow:#facc15;
+      --purple:#8b5cf6;
+      --shadow:none;
+      --radius:20px;
     }
 
     *{box-sizing:border-box;margin:0;padding:0}
@@ -37,7 +37,7 @@
     }
 
     .header{
-      background:linear-gradient(135deg,#ffffff,#eef4ff);
+      background:linear-gradient(145deg,#15161c,#1c1d24);
       border:1px solid var(--line);
       border-radius:24px;
       padding:22px;
@@ -66,9 +66,9 @@
     }
 
     .badge{
-      background:#e8f1ff;
-      color:var(--blue);
-      border:1px solid #cfe0ff;
+      background:#0f172a;
+      color:#d1d5db;
+      border:1px solid var(--line);
       padding:10px 14px;
       border-radius:999px;
       font-size:.85rem;
@@ -82,7 +82,7 @@
     }
 
     .card{
-      background:var(--card);
+      background:linear-gradient(145deg,#15161c,#1c1d24);
       border:1px solid var(--line);
       border-radius:var(--radius);
       padding:18px;
@@ -114,7 +114,7 @@
       background:var(--card2);
       border-radius:16px;
       padding:16px;
-      border:1px solid #e5ebf2;
+      border:1px solid var(--line);
     }
 
     .stat-label{
@@ -131,8 +131,16 @@
       font-weight:800;
     }
 
-    .green{color:var(--green)}
-    .red{color:var(--red)}
+    .green{
+      color:var(--green);
+      text-shadow:0 0 10px rgba(34,197,94,.28);
+    }
+
+    .red{
+      color:var(--red);
+      text-shadow:0 0 10px rgba(239,68,68,.25);
+    }
+
     .blue{color:var(--blue)}
     .yellow{color:var(--yellow)}
     .purple{color:var(--purple)}
@@ -165,7 +173,7 @@
       border-radius:12px;
       padding:12px 14px;
       font-size:.95rem;
-      background:#fff;
+      background:#0f1117;
       color:var(--text);
       outline:none;
     }
@@ -177,7 +185,7 @@
 
     input:focus, select:focus, textarea:focus{
       border-color:var(--blue);
-      box-shadow:0 0 0 3px rgba(37,99,235,.12);
+      box-shadow:0 0 0 3px rgba(59,130,246,.15);
     }
 
     .btn-row{
@@ -202,8 +210,8 @@
     }
 
     .btn-secondary{
-      background:#e9eef5;
-      color:var(--text);
+      background:#232630;
+      color:#fff;
     }
 
     .btn-danger{
@@ -221,19 +229,20 @@
       width:100%;
       border-collapse:collapse;
       min-width:900px;
-      background:#fff;
+      background:#14161c;
     }
 
     th, td{
       padding:12px 10px;
-      border-bottom:1px solid #edf1f5;
+      border-bottom:1px solid #262a33;
       text-align:left;
       font-size:.92rem;
       vertical-align:top;
+      color:var(--text);
     }
 
     th{
-      background:#f8fafc;
+      background:#181b22;
       color:var(--muted);
       font-size:.74rem;
       text-transform:uppercase;
@@ -249,7 +258,7 @@
     }
 
     .pill.win{
-      background:rgba(22,163,74,.12);
+      background:rgba(34,197,94,.12);
       color:var(--green);
     }
 
@@ -259,12 +268,12 @@
     }
 
     .insight{
-      background:linear-gradient(135deg,#f5f9ff,#eef6ff);
-      border:1px solid #dbe8ff;
+      background:linear-gradient(145deg,#161a21,#1c212a);
+      border:1px solid var(--line);
       border-radius:16px;
       padding:16px;
       line-height:1.6;
-      color:#23314f;
+      color:#e5e7eb;
       margin-top:12px;
     }
 
@@ -276,7 +285,7 @@
 
     .list-item{
       background:var(--card2);
-      border:1px solid #e5ebf2;
+      border:1px solid var(--line);
       border-radius:14px;
       padding:14px;
     }
@@ -285,7 +294,7 @@
       color:var(--muted);
       padding:22px;
       text-align:center;
-      background:#fafcff;
+      background:#11141a;
       border:1px dashed var(--line);
       border-radius:16px;
     }
@@ -303,15 +312,82 @@
       margin-top:12px;
     }
 
-    @media (max-width: 900px){
-      .col-8,.col-4,.col-6,.col-3{grid-column:span 12}
-      .stats{grid-template-columns:repeat(2,1fr)}
-      .form-grid{grid-template-columns:1fr}
+    .score-wrap{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:20px;
+      flex-wrap:wrap;
     }
 
-    @media (max-width: 560px){
-      .stats{grid-template-columns:1fr}
-      .title{font-size:1.6rem}
+    .score-left{
+      display:flex;
+      flex-direction:column;
+      gap:6px;
+    }
+
+    .score-number{
+      font-size:2.7rem;
+      font-weight:900;
+      line-height:1;
+    }
+
+    .score-sub{
+      color:var(--muted);
+      font-size:.95rem;
+    }
+
+    .score-circle{
+      width:100px;
+      height:100px;
+      border-radius:50%;
+      border:6px solid var(--green);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:1.7rem;
+      font-weight:900;
+      color:#fff;
+      box-shadow:0 0 20px rgba(34,197,94,.15);
+      background:rgba(34,197,94,.04);
+      flex-shrink:0;
+    }
+
+    .week-row{
+      display:grid;
+      grid-template-columns:repeat(7,1fr);
+      gap:10px;
+      margin-top:8px;
+    }
+
+    .day-box{
+      background:#cbd5e1;
+      color:#fff;
+      border-radius:14px;
+      padding:12px 8px;
+      min-height:78px;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      font-weight:700;
+    }
+
+    .day-box.green-day{
+      background:#8ee06f;
+      color:#fff;
+    }
+
+    .day-box .day-num{
+      font-size:1.25rem;
+      font-weight:800;
+      line-height:1.1;
+    }
+
+    .day-box .day-pnl{
+      font-size:.9rem;
+      margin-top:6px;
     }
 
     .screen {
@@ -346,6 +422,20 @@
       font-weight: 800;
       margin-top: 20px;
     }
+
+    @media (max-width: 900px){
+      .col-8,.col-4,.col-6,.col-3{grid-column:span 12}
+      .stats{grid-template-columns:repeat(2,1fr)}
+      .form-grid{grid-template-columns:1fr}
+      .week-row{grid-template-columns:repeat(4,1fr)}
+    }
+
+    @media (max-width: 560px){
+      .stats{grid-template-columns:1fr}
+      .title{font-size:1.6rem}
+      .week-row{grid-template-columns:repeat(2,1fr)}
+      .score-wrap{flex-direction:column;align-items:flex-start}
+    }
   </style>
 </head>
 <body>
@@ -379,6 +469,23 @@
       </div>
 
       <div class="grid">
+        <div class="card col-12">
+          <div class="score-wrap">
+            <div class="score-left">
+              <div class="card-title">Trader Score</div>
+              <div class="score-number" id="traderScore">0</div>
+              <div class="score-sub" id="scoreLabel">Based on your performance</div>
+            </div>
+
+            <div class="score-circle" id="scoreCircle">0</div>
+          </div>
+        </div>
+
+        <div class="card col-12">
+          <div class="card-title">This Week</div>
+          <div class="week-row" id="weekRow"></div>
+        </div>
+
         <div class="card col-12">
           <div class="card-title">Performance Dashboard</div>
           <div class="stats">
@@ -584,6 +691,15 @@
       return sign + "$" + Math.abs(value).toFixed(2);
     }
 
+    function formatCompactMoney(value){
+      const abs = Math.abs(value);
+      const sign = value < 0 ? "-" : "";
+
+      if(abs >= 1000000) return sign + "$" + (abs / 1000000).toFixed(1) + "M";
+      if(abs >= 1000) return sign + "$" + (abs / 1000).toFixed(1) + "K";
+      return sign + "$" + abs.toFixed(0);
+    }
+
     function getTradePnL(trade){
       const entry = Number(trade.entry) || 0;
       const exit = Number(trade.exit) || 0;
@@ -677,6 +793,71 @@
       const avgLoss = losses.length ? losses.reduce((a,b)=>a+b,0) / losses.length : 0;
 
       return { totalPnL, winRate, avgWin, avgLoss, wins, losses };
+    }
+
+    function calculateScore(){
+      const { winRate, avgWin, avgLoss } = getStats();
+
+      if(!trades.length){
+        $("traderScore").textContent = "0";
+        $("scoreCircle").textContent = "0";
+        $("scoreLabel").textContent = "Based on your performance";
+        return;
+      }
+
+      const rr = avgLoss !== 0 ? Math.abs(avgWin / avgLoss) : (avgWin > 0 ? 3 : 0);
+      let score = (winRate * 0.6) + (Math.min(rr, 3) * 100 * 0.4 / 3);
+      score = Math.max(0, Math.min(100, Math.round(score)));
+
+      $("traderScore").textContent = score;
+      $("scoreCircle").textContent = score;
+
+      if(score >= 80){
+        $("scoreLabel").textContent = "Locked in";
+        $("scoreCircle").style.borderColor = "#22c55e";
+      } else if(score >= 60){
+        $("scoreLabel").textContent = "Improving";
+        $("scoreCircle").style.borderColor = "#facc15";
+      } else {
+        $("scoreLabel").textContent = "Needs discipline";
+        $("scoreCircle").style.borderColor = "#ef4444";
+      }
+    }
+
+    function renderWeekBoxes(){
+      const row = $("weekRow");
+      const now = new Date();
+      const currentDay = now.getDay();
+      const sundayBased = new Date(now);
+      sundayBased.setDate(now.getDate() - currentDay);
+
+      const dailyMap = {};
+
+      trades.forEach(trade => {
+        if(!trade.date) return;
+        const pnl = getTradePnL(trade);
+        if(!dailyMap[trade.date]) dailyMap[trade.date] = 0;
+        dailyMap[trade.date] += pnl;
+      });
+
+      let html = "";
+
+      for(let i = 0; i < 7; i++){
+        const d = new Date(sundayBased);
+        d.setDate(sundayBased.getDate() + i);
+        const iso = d.toISOString().slice(0,10);
+        const pnl = dailyMap[iso] || 0;
+        const isGreen = pnl > 0;
+
+        html += `
+          <div class="day-box ${isGreen ? "green-day" : ""}">
+            <div class="day-num">${d.getDate()}</div>
+            <div class="day-pnl">${pnl !== 0 ? formatCompactMoney(pnl) : ""}</div>
+          </div>
+        `;
+      }
+
+      row.innerHTML = html;
     }
 
     function renderStats(){
@@ -835,6 +1016,8 @@
       renderStats();
       renderTrades();
       renderInsights();
+      calculateScore();
+      renderWeekBoxes();
     }
 
     setToday();

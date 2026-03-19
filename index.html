@@ -28,6 +28,7 @@
       background:var(--bg);
       color:var(--text);
       min-height:100vh;
+      padding-bottom:120px;
     }
 
     .app{
@@ -423,6 +424,117 @@
       margin-top: 20px;
     }
 
+    .bottom-nav{
+      position:fixed;
+      left:0;
+      right:0;
+      bottom:0;
+      height:88px;
+      background:rgba(5,5,8,.96);
+      border-top:1px solid #181b22;
+      display:flex;
+      align-items:center;
+      justify-content:space-around;
+      z-index:1000;
+    }
+
+    .nav-item{
+      background:none;
+      border:none;
+      color:#8b93a7;
+      font-size:1rem;
+      font-weight:700;
+      padding:10px 12px;
+      margin-top:0;
+    }
+
+    .nav-item.active{
+      color:#fff;
+    }
+
+    .fab-main{
+      position:absolute;
+      left:50%;
+      top:-26px;
+      transform:translateX(-50%);
+      width:78px;
+      height:78px;
+      border-radius:50%;
+      border:none;
+      background:#fff;
+      color:#000;
+      font-size:3rem;
+      line-height:1;
+      font-weight:400;
+      box-shadow:0 10px 30px rgba(0,0,0,.35);
+      z-index:1002;
+      margin-top:0;
+    }
+
+    .fab-main.open{
+      font-size:2.8rem;
+    }
+
+    .fab-menu{
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,.62);
+      display:none;
+      align-items:flex-end;
+      justify-content:center;
+      padding-bottom:110px;
+      z-index:999;
+    }
+
+    .fab-menu.show{
+      display:flex;
+    }
+
+    .fab-actions{
+      display:flex;
+      flex-direction:column;
+      gap:18px;
+      width:min(92vw, 360px);
+    }
+
+    .fab-action{
+      width:100%;
+      display:flex;
+      align-items:center;
+      gap:16px;
+      padding:18px 20px;
+      border:none;
+      border-radius:999px;
+      background:rgba(37,39,46,.96);
+      color:#fff;
+      text-align:left;
+      box-shadow:0 8px 24px rgba(0,0,0,.25);
+      margin-top:0;
+    }
+
+    .fab-icon{
+      width:52px;
+      height:52px;
+      border-radius:50%;
+      background:#2f3138;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:1.4rem;
+      flex-shrink:0;
+    }
+
+    .fab-action-title{
+      font-size:1.05rem;
+      font-weight:800;
+    }
+
+    .fab-action-sub{
+      font-size:.95rem;
+      color:#9ca3af;
+      margin-top:4px;
+    }
+
     @media (max-width: 900px){
       .col-8,.col-4,.col-6,.col-3{grid-column:span 12}
       .stats{grid-template-columns:repeat(2,1fr)}
@@ -678,6 +790,44 @@
         </div>
       </div>
     </div>
+  </div>
+
+  <div class="fab-menu" id="fabMenu">
+    <div class="fab-actions">
+      <button class="fab-action" onclick="openLogTrade()">
+        <div class="fab-icon">◉</div>
+        <div>
+          <div class="fab-action-title">Log Trade</div>
+          <div class="fab-action-sub">Record entry &amp; exit</div>
+        </div>
+      </button>
+
+      <button class="fab-action" onclick="openDailyRecap()">
+        <div class="fab-icon">🗒</div>
+        <div>
+          <div class="fab-action-title">Daily Recap</div>
+          <div class="fab-action-sub">Reflect on today</div>
+        </div>
+      </button>
+
+      <button class="fab-action" onclick="openImport()">
+        <div class="fab-icon">⤴</div>
+        <div>
+          <div class="fab-action-title">Import</div>
+          <div class="fab-action-sub">From your broker</div>
+        </div>
+      </button>
+    </div>
+  </div>
+
+  <div class="bottom-nav">
+    <button class="nav-item active">Home</button>
+    <button class="nav-item">Trades</button>
+
+    <button class="fab-main" id="fabMain" onclick="toggleFab()">+</button>
+
+    <button class="nav-item">Calendar</button>
+    <button class="nav-item">Analytics</button>
   </div>
 
   <script>
@@ -1011,6 +1161,50 @@
           ? "You have not tagged enough mistakes yet."
           : `${worstMistake} is costing you the most. Trades with this mistake average ${formatMoney(worstMistakeAvg)}. Tightening that one habit could make a real difference in your weekly P&L.`;
     }
+
+    function toggleFab(){
+      const menu = $("fabMenu");
+      const main = $("fabMain");
+
+      menu.classList.toggle("show");
+      main.classList.toggle("open");
+
+      if(menu.classList.contains("show")){
+        main.textContent = "×";
+      } else {
+        main.textContent = "+";
+      }
+    }
+
+    function openLogTrade(){
+      toggleFab();
+      document.querySelector(".card.col-8").scrollIntoView({ behavior: "smooth" });
+    }
+
+    function openDailyRecap(){
+      toggleFab();
+      alert("Daily Recap feature coming next.");
+    }
+
+    function openImport(){
+      toggleFab();
+      alert("Broker import feature coming next.");
+    }
+
+    document.addEventListener("click", function(e){
+      const menu = $("fabMenu");
+      const main = $("fabMain");
+
+      if(
+        menu.classList.contains("show") &&
+        !e.target.closest(".fab-actions") &&
+        !e.target.closest("#fabMain")
+      ){
+        menu.classList.remove("show");
+        main.classList.remove("open");
+        main.textContent = "+";
+      }
+    });
 
     function renderAll(){
       renderStats();

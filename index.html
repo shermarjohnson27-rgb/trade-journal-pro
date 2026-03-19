@@ -313,6 +313,38 @@
       .stats{grid-template-columns:1fr}
       .title{font-size:1.6rem}
     }
+    .screen {
+  display: none;
+  min-height: 100vh;
+  background: #000;
+  color: #fff;
+  padding: 32px 24px;
+}
+
+.screen.active {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.screen h1 {
+  font-size: 2rem;
+  font-weight: 800;
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.screen button {
+  width: 100%;
+  padding: 16px;
+  border: none;
+  border-radius: 16px;
+  background: #fff;
+  color: #000;
+  font-size: 1.1rem;
+  font-weight: 800;
+  margin-top: 20px;
+}
   </style>
 </head>
 <body>
